@@ -1,2 +1,2 @@
 # Project
-https://hub.docker.com/r/nilayozogul/oss-project
+https://hub.docker.com/u/nilayozogul 
