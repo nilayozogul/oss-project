@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  title: Açık Kaynak Kodlu Kütüphane API
+  description: Açık kaynak kodlu kütüphane için API belirtimi
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+paths:
+  /:
+    get:
+      summary: Ana Sayfa
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Yeni bir kitap ekler
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+              required:
+                - title
+                - author
+      responses:
+        '201':
+          description: Başarılı ekleme
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+  /books:
+    get:
+      summary: Tüm kitapları getirir
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    author:
+                      type: string
+    post:
+      summary: Yeni bir kitap ekler
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+              required:
+                - title
+                - author
+      responses:
+        '201':
+          description: Başarılı ekleme
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+  /books/{id}:
+    get:
+      summary: Belirli bir kitabı getirir
+      parameters:
+        - name: id
+          in: path
+          description: Kitap ID'si
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+        '404':
+          description: Kitap bulunamadı
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: Belirli bir kitabı günceller
+      parameters:
+        - name: id
+          in: path
+          description: Kitap ID'si
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+      responses:
+        '200':
+          description: Başarılı güncelleme
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+        '404':
+          description: Kitap bulunamadı
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    delete:
+      summary: Belirli bir kitabı siler
+      parameters:
+        - name: id
+          in: path
+          description: Kitap ID'si
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Başarılı silme
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Kitap bulunamadı
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
